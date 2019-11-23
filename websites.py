@@ -52,7 +52,7 @@ class TecAdmin(NewsCloud365):
         try:
             start_page = 1
             list_objects = []
-            while True:
+            while start_page <= 10:
                 html_dom = self.get_dom(start_page)
                 mark = html_dom.findAll(class_="post-box")
                 for x in mark:
