@@ -37,6 +37,7 @@ def crawl(*args):
             mydb.update_true(myconnect, table)
         else:
             pass
+        mydb.close(myconnect)
 
 def main():
     web_need_crawl_1 = NewsCloud365()
