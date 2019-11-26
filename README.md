@@ -32,7 +32,7 @@ sudo pip3 install -r requirements.txt
         abc@gmail.com
         bcd@gmail.com
         cde@outlook.com
-        
+
         # Phải đưa trỏ chuột xuống dòng dưới cùng
         ```
 **B4 :** Chạy chương trình :
@@ -41,4 +41,12 @@ python3 main.py
 ```
 **B5 :** Lên lịch trình crontab ( thời gian khuyến nghị : mỗi `10p` )
 ```
-echo "*/6 * * * * root path_to_file_main.py" >> /etc/crontab
+echo "*/5 * * * * root path_to_file_main.py" >> /etc/crontab
+```
+
+>## **Các trang web được crawl trong chương trình**
+- https://news.cloud365.vn/
+- https://tecadmin.net/
+- https://www.techrum.vn
+- https://www.digitalocean.com/community/tutorials
+- https://cuongquach.com/category/linux/
