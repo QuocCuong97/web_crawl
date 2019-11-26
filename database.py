@@ -32,6 +32,13 @@ class Mariadb(object):
         link = mycursor.fetchone()
         return link[0].strip()
 
+    def newest_title(self, myconnect, para_table):
+        mycursor = myconnect.cursor()
+        sql = 'SELECT title FROM {} ORDER BY ID DESC LIMIT 1'.format(para_table)
+        mycursor.execute(sql)
+        title = mycursor.fetchone()
+        return title[0].strip()
+
     def update_true(self, myconnect, para_table):
         mycursor = myconnect.cursor()
         sql = 'UPDATE {} SET telegram = "True" ORDER BY id DESC LIMIT 1'.format(para_table)

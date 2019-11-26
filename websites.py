@@ -1,3 +1,5 @@
+import re
+import requests
 import urllib.request
 from bs4 import BeautifulSoup
 from objects import ObjectCrawl
@@ -78,6 +80,7 @@ class TecAdmin(NewsCloud365):
             pass
         return list_objects
 
+
 class Techrum(object):
 
     def __init__(self):
@@ -114,6 +117,75 @@ class Techrum(object):
                     self.author = author_search.string
                     self.author = self.author.strip()
                 
+                    new_post = ObjectCrawl(self.title, self.link, self.time, self.author, self.source)
+                    dic = new_post.to_dict()
+                    list_objects.append(dic)
+                start_page+=1
+        except:
+            pass
+        return list_objects
+
+
+class DigitalOcean(object):
+
+    def __init__(self):
+        self.url = "https://www.digitalocean.com/community/tutorials"
+        self.homepage = "https://www.digitalocean.com/community/"
+        self.source = "DigitalOcean"
+    
+    def get_objects(self):
+        list_objects = []
+        page = requests.get(self.url)
+        html_dom = BeautifulSoup(page.text, 'html5lib')
+        mark = html_dom.findAll(attrs={'class' : 'feedable-details'})
+        for x in mark:
+            title_search = x.find('h3')
+            self.title = title_search.string.strip()
+                    
+            link_search = x.find("a", {"data-js": True})
+            self.link = self.homepage + link_search['href']
+
+            time_search = x.find(attrs={'class' : 'publish-date timeago'})
+            self.time = time_search['title']
+            
+            author_search = x.find(attrs={'class' : 'authors'})
+            self.author = author_search.string.strip()
+            self.author = re.sub('By', '', self.author)
+            self.author = self.author.strip()
+
+            new_post = ObjectCrawl(self.title, self.link, self.time, self.author, self.source)
+            dic = new_post.to_dict()
+            list_objects.append(dic)
+        return list_objects
+
+
+class CuongQuach(NewsCloud365):
+
+    def __init__(self):
+        self.url = "https://cuongquach.com/category/linux/"
+        self.source = "CuongQuach"
+
+    def get_objects(self):
+        try:
+            start_page = 1
+            list_objects = []
+            while True:
+                html_dom = self.get_dom(start_page)
+                mark = html_dom.findAll(class_="td-block-span6")
+                for x in mark:
+                    title_search = x.find(attrs={'class' : 'entry-title td-module-title'})
+                    title_search = title_search.a
+                    self.title = title_search['title']
+
+                    self.link = title_search['href']
+
+                    time_search = x.find(attrs={'class' : 'entry-date updated td-module-date'})
+                    self.time = time_search.string
+
+                    author_search = x.find(attrs={'class' : 'td-post-author-name'})
+                    author_search = author_search.a
+                    self.author = author_search.string
+                    
                     new_post = ObjectCrawl(self.title, self.link, self.time, self.author, self.source)
                     dic = new_post.to_dict()
                     list_objects.append(dic)

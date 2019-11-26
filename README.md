@@ -21,6 +21,20 @@ sudo pip3 install -r requirements.txt
     "telegram_token": "<Token của Bot đã tạo trước đó",
     "telegram_chatid": "<Chat-id của Bot>"
     ```
+- Phần thông tin về Email Bot :
+    ```sh
+    "email_sender": "<Email của sender",
+    "password_sender": "<Password của sender",
+    "mail_target": "<Đường dẫn file chứa thông tin các email cần gửi>"
+    ```
+    - File `mail_target.txt` : chứa thông tin các email cần gửi
+        ```sh
+        abc@gmail.com
+        bcd@gmail.com
+        cde@outlook.com
+        
+        # Phải đưa trỏ chuột xuống dòng dưới cùng
+        ```
 **B4 :** Chạy chương trình :
 ```
 python3 main.py
