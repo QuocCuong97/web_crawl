@@ -16,6 +16,10 @@ sudo pip3 install -r requirements.txt
     "db_password": "<Mật khẩu user>",
     "db_database": "web_crawling"    # Tạo trước 1 database để chứa dữ liệu crawl
     ```
+    > Chú ý khi tạo database :
+    ```sh
+    CREATE DATABASE web_crawl CHARACTER SET utf8 COLLATE utf8_general_ci;
+    ```
 - Phần thông tin về Telegram Bot :
     ```sh
     "telegram_token": "<Token của Bot đã tạo trước đó",

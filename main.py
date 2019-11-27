@@ -34,13 +34,13 @@ def crawl(*args):
         mydb.query(myconnect, table)
 
         bot_1 = Telegram_Bot(token, chatid)
-        # bot_2 = Email_Bot(sender, sender_passwd)
+        bot_2 = Email_Bot(sender, sender_passwd)
         result = mydb.query(myconnect, table)
         if result == '0':
             link = mydb.newest_link(myconnect, table)
             bot_1.send_message(link)
-            # bot_2.get_target(target_file)
-            # bot_2.send_email('New Post from {}'.format(x.source), link)
+            bot_2.get_target(target_file)
+            bot_2.send_email('New Post from {}'.format(x.source), link)
             mydb.update_true(myconnect, table)
         else:
             pass
