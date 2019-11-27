@@ -3,7 +3,6 @@ import requests
 import urllib.request
 from bs4 import BeautifulSoup
 from objects import ObjectCrawl
-from json_execute import export_to_json
 
 
 class NewsCloud365(object):
