@@ -192,3 +192,31 @@ class CuongQuach(NewsCloud365):
         except:
             pass
         return list_objects
+
+
+class ICTNews(object):
+
+    def __init__(self):
+        self.url = "https://ictnews.vn/"
+        self.source = "ICTNews"
+
+    def get_objects(self):
+        list_objects = []
+        page = requests.get(self.url)
+        html_dom = BeautifulSoup(page.text, 'html5lib')
+        mark_0 = html_dom.find(class_="news-list")
+        mark = mark_0.findAll(class_="g-content")
+        for x in mark:
+            title_search = x.find(attrs={'class' : 'g-title'})
+            self.title = title_search.string
+
+            self.link = title_search['href']
+
+            self.time = 'None'
+
+            self.author = 'None'
+
+            new_post = ObjectCrawl(self.title, self.link, self.time, self.author, self.source)
+            dic = new_post.to_dict()
+            list_objects.append(dic)
+        return list_objects

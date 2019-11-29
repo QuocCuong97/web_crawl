@@ -1,4 +1,4 @@
-from websites import NewsCloud365, TecAdmin, Techrum, DigitalOcean, CuongQuach
+from websites import NewsCloud365, TecAdmin, Techrum, DigitalOcean, CuongQuach, ICTNews
 from json_execute import load_from_json, export_to_json
 from database import Mariadb
 from bot import Telegram_Bot, Email_Bot
@@ -51,6 +51,7 @@ def main():
     web_3 = Techrum()
     web_4 = DigitalOcean()
     web_5 = CuongQuach()
-    crawl(web_1, web_2, web_3, web_4, web_5)
+    web_6 = ICTNews()
+    crawl(web_1, web_2, web_3, web_4, web_5, web_6)
 
 main()
