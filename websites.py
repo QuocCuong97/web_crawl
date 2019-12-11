@@ -220,3 +220,31 @@ class ICTNews(object):
             dic = new_post.to_dict()
             list_objects.append(dic)
         return list_objects
+
+
+class TinhTe(object):
+
+    def __init__(self):
+        self.url = "https://tinhte.vn/"
+        self.source = "TinhTe"
+
+    def get_objects(self):
+        list_objects = []
+        page = requests.get(self.url)
+        html_dom = BeautifulSoup(page.text, 'html5lib')
+        mark_0 = html_dom.find('ol', class_="jsx-1525933963")
+        mark = mark_0.findAll('li')
+        for x in mark:
+            self.title = x.div.article.a.h3.string
+
+            self.link = x.div.article.a['href']
+
+            self.time = 'None'
+
+            author_search = x.find(class_="jsx-2418319489 author")
+            self.author = author_search.string
+
+            new_post = ObjectCrawl(self.title, self.link, self.time, self.author, self.source)
+            dic = new_post.to_dict()
+            list_objects.append(dic)
+        return list_objects
